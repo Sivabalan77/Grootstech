@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>GrootProjects</title>
+<style media="screen">
+#custom-button{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    padding :10px;
+    color: white;
+    background-color: #555555;
+    border:1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    }
+    #custom-button:hover{
+    background-color: #00b28f;
+    }
+    #custom-text{
+              margin: 0;
+  position: absolute;
+            top: 50%;
+            left: 63%;
+  transform: translate(-50%, -50%);
+            font-family:sans-serif;
+            color: black;
+    }
+    #submitable{
+    margin: 0;
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    padding :10px;
+    color: white;
+    background-color: #DC143c;
+    border:1px solid #000;
+    border-radius: 5px;
+    cursor: pointer; 
+    }
+    
+</style>
+
+</head>
+<body>
+<div>
+<form action="FileUploadServlet" method="post" enctype="multipart/form-data">
+<input type="file" id="real-file" hidden="hidden" multiple/>
+<button type="button" id="custom-button">CHOOSE A CSV FILE</button>
+<span id="custom-text">No file chosen.</span>
+Location <input name="txtPath"/> <br>
+<input type="submit" id="submitable"/>
+</form>
+</div>
+<script type="text/javascript">
+const realFileBtn = document.getElementById("real-file");
+const customBtn = document.getElementById("custom-button");
+const customTxt = document.getElementById("custom-text");
+
+customBtn.addEventListener("click", function() {
+  realFileBtn.click();
+});
+
+realFileBtn.addEventListener("change", function() {
+  if (realFileBtn.value) {
+    customTxt.innerHTML = realFileBtn.value.match(
+      /[\/\\]([\w\d\s\.\-\(\)]+)$/
+    )[1];
+  } else {
+    customTxt.innerHTML = "No file chosen, yet.";
+  }
+});
+</script>
+  
+</body>
+</html>
